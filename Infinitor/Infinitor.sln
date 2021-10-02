@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EB4D9009-0DC1-4CED-9D7C-06CC14109AB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinitor", "Infinitor\Infinitor.csproj", "{EECBAD65-708C-4B98-840C-FB186316F302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinitor.Tests", "Infinitor.Tests\Infinitor.Tests.csproj", "{E8D191ED-BA1A-4277-8B9F-BB258DEF051B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EECBAD65-708C-4B98-840C-FB186316F302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EECBAD65-708C-4B98-840C-FB186316F302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EECBAD65-708C-4B98-840C-FB186316F302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EECBAD65-708C-4B98-840C-FB186316F302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8D191ED-BA1A-4277-8B9F-BB258DEF051B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8D191ED-BA1A-4277-8B9F-BB258DEF051B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8D191ED-BA1A-4277-8B9F-BB258DEF051B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8D191ED-BA1A-4277-8B9F-BB258DEF051B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E8D191ED-BA1A-4277-8B9F-BB258DEF051B} = {EB4D9009-0DC1-4CED-9D7C-06CC14109AB7}
+	EndGlobalSection
+EndGlobal
