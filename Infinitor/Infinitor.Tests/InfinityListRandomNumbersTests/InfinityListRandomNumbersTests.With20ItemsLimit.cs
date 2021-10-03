@@ -3,16 +3,16 @@ using NUnit.Framework;
 
 namespace Infinitor
 {
-    public partial class InfinityRandomNumbersTests
+    public partial class InfinityListRandomNumbersTests
     {
-        public class With20ItemsLimit : InfinityRandomNumbersTests
+        public class With20ItemsLimit : InfinityListRandomNumbersTests
         {
             private const int CappedValue = 20;
 
             [SetUp]
             public void Setup()
             {
-                list = new InfinityRandomNumbers(CappedValue);
+                list = new InfinityListRandomNumbers(CappedValue);
             }
 
             [Test]

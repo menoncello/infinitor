@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Infinitor
 {
-    public partial class InfinityRandomNumbersTests
+    public partial class InfinityListRandomNumbersTests
     {
         public partial class WithNoLimits
         {

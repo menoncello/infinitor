@@ -4,9 +4,9 @@ using NUnit.Framework;
 
 namespace Infinitor
 {
-    public partial class InfinityRandomNumbersTests
+    public partial class InfinityListRandomNumbersTests
     {
-        public class WithAListWith3Items : InfinityRandomNumbersTests
+        public class WithAListWith3Items : InfinityListRandomNumbersTests
         {
             private Dictionary<int, int> randomItems = null!;
 
@@ -19,7 +19,7 @@ namespace Infinitor
                                   { 6, 0 },
                                   { 9, 0 }
                               };
-                list = new InfinityRandomNumbers(randomItems: randomItems.Keys);
+                list = new InfinityListRandomNumbers(randomItems: randomItems.Keys);
             }
 
             [Test]

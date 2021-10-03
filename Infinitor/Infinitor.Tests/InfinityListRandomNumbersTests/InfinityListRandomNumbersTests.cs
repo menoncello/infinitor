@@ -3,9 +3,9 @@ using Infinitor.Tools;
 
 namespace Infinitor
 {
-    public partial class InfinityRandomNumbersTests
+    public partial class InfinityListRandomNumbersTests
     {
-        private InfinityRandomNumbers list = null!;
+        private InfinityListRandomNumbers list = null!;
 
         private void AssertRandomNumberSeeded(int seed)
         {

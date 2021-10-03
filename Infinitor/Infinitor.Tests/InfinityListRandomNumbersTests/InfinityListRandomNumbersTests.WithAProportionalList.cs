@@ -4,9 +4,9 @@ using NUnit.Framework;
 
 namespace Infinitor
 {
-    public partial class InfinityRandomNumbersTests
+    public partial class InfinityListRandomNumbersTests
     {
-        public class WithAProportionalList : InfinityRandomNumbersTests
+        public class WithAProportionalList : InfinityListRandomNumbersTests
         {
             private const int Repeats = 1000;
             private List<ProportionalItem<int>> proportionalList = null!;
@@ -20,7 +20,7 @@ namespace Infinitor
                                        new(2, 1),
                                        new(1, 2)
                                    };
-                list = new InfinityRandomNumbers(proportionalList);
+                list = new InfinityListRandomNumbers(proportionalList);
                 count = new Dictionary<int, int>
                         {
                             {1, 0},
