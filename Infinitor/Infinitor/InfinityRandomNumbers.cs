@@ -1,20 +1,28 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Infinitor
 {
     public class InfinityRandomNumbers : InfinityList<int>
     {
-        public InfinityRandomNumbers(IEnumerable<ProportionalItem<int>>? proportional = null,
-            IEnumerable<int>? randomItems = null, int limitItems = int.MaxValue)
-            : base(proportional, randomItems, limitItems)
+        public InfinityRandomNumbers()
+        {
+        }
+
+        public InfinityRandomNumbers(IEnumerable<ProportionalItem<int>> proportional) : base(proportional)
+        {
+        }
+
+        public InfinityRandomNumbers(IEnumerable<int> randomItems) : base(randomItems)
+        {
+        }
+
+        public InfinityRandomNumbers(int cappedValue) : base(cappedValue)
         {
         }
 
         protected override int GetGeneratedCustomItem(int randomValue)
         {
-            return randomValue % LimitItems;
+            return randomValue;
         }
     }
 }

@@ -7,18 +7,65 @@ namespace Infinitor
 {
     public abstract class InfinityList<T> : IReadOnlyList<T>, ICollection<T>
     {
-        private T[] RandomItems { get; }
-        private ProportionalItem<T>[] Proportional { get; }
-        protected int LimitItems { get; }
+        private readonly InfinityListType type;
+        private readonly T[] randomItems = Array.Empty<T>();
+        private readonly ProportionalItem<T>[] proportional = Array.Empty<ProportionalItem<T>>();
+        private readonly int cappedValue = int.MaxValue;
         private readonly int proportionalTotal;
 
-        protected InfinityList(IEnumerable<ProportionalItem<T>>? proportional = null,
-            IEnumerable<T>? randomItems = null, int limitItems = int.MaxValue)
+        /// <summary>
+        /// Constructor of the InfinityList
+        /// </summary>
+        /// <remarks>
+        /// This function is O(1)
+        /// </remarks>
+        protected InfinityList()
         {
-            Proportional = proportional?.ToArray() ?? Array.Empty<ProportionalItem<T>>();
-            LimitItems = limitItems;
-            RandomItems = randomItems?.ToArray() ?? Array.Empty<T>();
-            proportionalTotal = Proportional.Sum(x => x.FullIntChance);
+            type = InfinityListType.Unlimited;
+        }
+        
+        /// <summary>
+        /// Constructor of the InfinityList
+        /// </summary>
+        /// <param name="proportional">
+        /// List of proportional items
+        /// </param>
+        /// <remarks>
+        /// This function is O(n)
+        /// </remarks>
+        protected InfinityList(IEnumerable<ProportionalItem<T>> proportional)
+        {
+            this.proportional = proportional.ToArray();
+            proportionalTotal = this.proportional.Sum(x => x.FullIntChance);
+            type = InfinityListType.Proportional;
+        }
+        /// <summary>
+        /// Constructor of the InfinityList
+        /// </summary>
+        /// <param name="randomItems">
+        /// List of random items, every item will be have one of thus items
+        /// </param>
+        /// <remarks>
+        /// This function is O(1)
+        /// </remarks>
+        protected InfinityList(IEnumerable<T> randomItems)
+        {
+            this.randomItems = randomItems.ToArray();
+            type = InfinityListType.LimitedItems;
+        }
+
+        /// <summary>
+        /// Constructor of the InfinityList
+        /// </summary>
+        /// <param name="cappedValue"></param>
+        /// Will limit the number of items, ex: if pass 20, will had between 0 and 19 result
+        /// <remarks>
+        /// This function is O(1)
+        /// </remarks>
+        protected InfinityList(int cappedValue)
+        {
+            this.cappedValue = cappedValue;
+            type = InfinityListType.Capped;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -56,7 +103,26 @@ namespace Infinitor
             throw new InfinityListReadOnlyException();
         }
 
+        /// <summary>
+        /// Total items on this list
+        /// This will be always 2,147,483,647 this is the limit of positive integer
+        /// </summary>
+        /// <example>
+        /// Console.WriteLine(list.Count);
+        /// // Will print 2147483647
+        /// </example>
+        /// <remarks>
+        /// This function is O(1)
+        /// </remarks>
         public int Count => int.MaxValue;
+        
+        /// <summary>
+        /// Check if this list is a Read Only list
+        /// This will return always true
+        /// </summary>
+        /// <remarks>
+        /// This function is O(1)
+        /// </remarks>
         public bool IsReadOnly => true;
 
         public T this[int index] => GetGeneratedItem(index);
@@ -64,35 +130,42 @@ namespace Infinitor
         private T GetGeneratedItem(int index)
         {
             var rnd = new Random(index);
-            
             var value = rnd.Next();
 
-            if (RandomItems.Any())
-            {
-                var max = Math.Min(RandomItems.Length, LimitItems);
-                return RandomItems[value % max];
-            }
-            if (Proportional.Any())
-            {
-                var chance = value % proportionalTotal;
-                var selected = default(T);
-
-                foreach (var item in Proportional)
-                {
-                    if (chance < item.FullIntChance)
-                    {
-                        selected = item.Value;
-                        break;
-                    }
-
-                    chance -= item.FullIntChance;
-                }
-                
-                return selected!;
-            }
-
-            return GetGeneratedCustomItem(value);
+            return type switch
+                   {
+                       InfinityListType.Capped => GetGeneratedCustomItem(value % cappedValue),
+                       InfinityListType.LimitedItems => GetLimitedItems(value),
+                       InfinityListType.Proportional => GetProportionalValue(value),
+                       _ => GetGeneratedCustomItem(value)
+                   };
         }
+
+        private T GetLimitedItems(int value)
+        {
+            var max = Math.Min(randomItems.Length, cappedValue);
+            return randomItems[value % max];
+        }
+
+        private T GetProportionalValue(int value)
+        {
+            var chance = value % proportionalTotal;
+            var selected = default(T);
+
+            foreach (var item in proportional)
+            {
+                if (chance < item.FullIntChance)
+                {
+                    selected = item.Value;
+                    break;
+                }
+
+                chance -= item.FullIntChance;
+            }
+
+            return selected!;
+        }
+
         protected abstract T GetGeneratedCustomItem(int randomValue);
 
         [Serializable]
@@ -155,5 +228,13 @@ namespace Infinitor
                 GC.SuppressFinalize(this);
             }
         }
+    }
+
+    internal enum InfinityListType
+    {
+        Unlimited,
+        Capped,
+        LimitedItems,
+        Proportional
     }
 }

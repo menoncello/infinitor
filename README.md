@@ -2,6 +2,8 @@
 
 Generating infinity items throw your tests
 
+## How To Use
+
 ### Table Seeded of Reference
 
 |Seed|Random Number|Mod 3|Mod 4|Mod 5|Mod 7|Mod 12|Mod 15|
