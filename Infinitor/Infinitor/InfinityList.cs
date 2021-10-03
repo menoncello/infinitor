@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Infinitor
 {
-    public abstract class InfinityList<T> : IReadOnlyList<T>
+    public abstract class InfinityList<T> : IReadOnlyList<T>, ICollection<T>
     {
         protected T[] RandomItems { get; }
         protected int LimitItems { get; }
@@ -26,7 +26,33 @@ namespace Infinitor
             return GetEnumerator();
         }
 
+        public void Add(T item)
+        {
+            throw new InfinityListReadOnlyException();
+        }
+
+        public void Clear()
+        {
+            throw new InfinityListReadOnlyException();
+        }
+
+        public bool Contains(T item)
+        {
+            return true;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new TooLargeToCopyException();
+        }
+
+        public bool Remove(T item)
+        {
+            throw new InfinityListReadOnlyException();
+        }
+
         public int Count => int.MaxValue;
+        public bool IsReadOnly => true;
 
         public T this[int index] => GetGeneratedItem(index);
 
@@ -36,28 +62,34 @@ namespace Infinitor
         public record Enumerator : IEnumerator<T>
         {
             private readonly InfinityList<T> list;
-            private int index;
-            private bool disposed;
+            public int Index { get; private set; }
+            public bool Disposed { get; private set; }
+
+            public void JumpToIndex(int index)
+            {
+                Index = index;
+                Current = list[Index];
+            }
 
             internal Enumerator(InfinityList<T> list)
             {
                 this.list = list;
-                index = 0;
+                Index = 0;
                 Current = default!;
             }
 
             public bool MoveNext()
             {
-                if (index >= list.Count) return false;
+                if (Index >= list.Count) return false;
                 
-                Current = list[index];
-                index++;
+                Current = list[Index];
+                Index++;
                 return true;
             }
 
             public void Reset()
             {
-                index = 0;
+                Index = 0;
                 Current = default!;
             }
 
@@ -67,7 +99,7 @@ namespace Infinitor
 
             public void Dispose(bool disposing)
             {
-                if (disposed)
+                if (Disposed)
                 {
                     return;
                 }
@@ -77,11 +109,12 @@ namespace Infinitor
                     Reset();
                 }
 
-                disposed = true;
+                Disposed = true;
             }
             public void Dispose()
             {
                 Dispose(true);
+
                 GC.SuppressFinalize(this);
             }
         }
