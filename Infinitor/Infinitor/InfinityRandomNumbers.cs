@@ -6,21 +6,15 @@ namespace Infinitor
 {
     public class InfinityRandomNumbers : InfinityList<int>
     {
-        public InfinityRandomNumbers(IEnumerable<int>? randomItems = null, int limitItems = int.MaxValue)
-            : base(randomItems, limitItems)
+        public InfinityRandomNumbers(IEnumerable<ProportionalItem<int>>? proportional = null,
+            IEnumerable<int>? randomItems = null, int limitItems = int.MaxValue)
+            : base(proportional, randomItems, limitItems)
         {
         }
 
-        protected override int GetGeneratedItem(int index)
+        protected override int GetGeneratedCustomItem(int randomValue)
         {
-            var rnd = new Random(index);
-            
-            var value = rnd.Next();
-            var max = Math.Min(RandomItems.Length, LimitItems);
-            
-            return RandomItems.Any()
-                ? RandomItems[value % max]
-                : value % LimitItems;
+            return randomValue % LimitItems;
         }
     }
 }

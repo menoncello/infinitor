@@ -19,7 +19,7 @@ namespace Infinitor
                                   { 6, 0 },
                                   { 9, 0 }
                               };
-                list = new InfinityRandomNumbers(randomItems.Keys);
+                list = new InfinityRandomNumbers(randomItems: randomItems.Keys);
             }
 
             [Test]

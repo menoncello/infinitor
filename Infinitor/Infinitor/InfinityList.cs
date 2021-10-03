@@ -7,13 +7,18 @@ namespace Infinitor
 {
     public abstract class InfinityList<T> : IReadOnlyList<T>, ICollection<T>
     {
-        protected T[] RandomItems { get; }
+        private T[] RandomItems { get; }
+        private ProportionalItem<T>[] Proportional { get; }
         protected int LimitItems { get; }
+        private readonly int proportionalTotal;
 
-        protected InfinityList(IEnumerable<T>? randomItems = null, int limitItems = int.MaxValue)
+        protected InfinityList(IEnumerable<ProportionalItem<T>>? proportional = null,
+            IEnumerable<T>? randomItems = null, int limitItems = int.MaxValue)
         {
+            Proportional = proportional?.ToArray() ?? Array.Empty<ProportionalItem<T>>();
             LimitItems = limitItems;
             RandomItems = randomItems?.ToArray() ?? Array.Empty<T>();
+            proportionalTotal = Proportional.Sum(x => x.FullIntChance);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -56,7 +61,39 @@ namespace Infinitor
 
         public T this[int index] => GetGeneratedItem(index);
 
-        protected abstract T GetGeneratedItem(int index);
+        private T GetGeneratedItem(int index)
+        {
+            var rnd = new Random(index);
+            
+            var value = rnd.Next();
+
+            if (RandomItems.Any())
+            {
+                var max = Math.Min(RandomItems.Length, LimitItems);
+                return RandomItems[value % max];
+            }
+            if (Proportional.Any())
+            {
+                var chance = value % proportionalTotal;
+                var selected = default(T);
+
+                foreach (var item in Proportional)
+                {
+                    if (chance < item.FullIntChance)
+                    {
+                        selected = item.Value;
+                        break;
+                    }
+
+                    chance -= item.FullIntChance;
+                }
+                
+                return selected!;
+            }
+
+            return GetGeneratedCustomItem(value);
+        }
+        protected abstract T GetGeneratedCustomItem(int randomValue);
 
         [Serializable]
         public record Enumerator : IEnumerator<T>
