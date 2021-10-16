@@ -24,4 +24,8 @@
       <ProjectReference Include="..\Infinitor\Infinitor.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Doubles" />
+    </ItemGroup>
+
 </Project>
