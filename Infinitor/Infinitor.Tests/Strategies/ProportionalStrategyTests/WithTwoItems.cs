@@ -19,7 +19,7 @@ namespace Infinitor.Strategies
                     new(1, 2)
                 };
 
-                CreateProportionalStrategy(proportionalList: proportionalList);
+                CreateProportionalStrategy(proportionalList);
             }
             
             [Test]

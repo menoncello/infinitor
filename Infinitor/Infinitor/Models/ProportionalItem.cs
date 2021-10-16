@@ -4,7 +4,7 @@ namespace Infinitor
 {
     public class ProportionalItem<T>
     {
-        public const int ChanceMultiplier = 1000;
+        private const int ChanceMultiplier = 1000;
 
         public ProportionalItem(decimal chance, T value)
         {
