@@ -13,11 +13,7 @@ namespace Infinitor
             public int Index { get; private set; }
             public bool Disposed { get; private set; }
 
-            public void JumpToIndex(int index)
-            {
-                Index = index;
-                Current = list[Index];
-            }
+            public void JumpToIndex(int index) => Current = list[Index = index];
 
             internal Enumerator(InfinityList<T> list)
             {
@@ -30,8 +26,7 @@ namespace Infinitor
             {
                 if (Index >= list.Count) return false;
                 
-                Current = list[Index];
-                Index++;
+                Current = list[Index++];
                 return true;
             }
 
@@ -50,10 +45,8 @@ namespace Infinitor
                 if (disposing) Reset();
                 Disposed = true;
             }
-            public void Dispose()
-            {
-                Dispose(true);
-            }
+            
+            public void Dispose() => Dispose(true);
         }
     }
 }

@@ -15,45 +15,21 @@ namespace Infinitor
         /// <remarks>
         /// This function is O(1)
         /// </remarks>
-        public InfinityList(IGenerationStrategy<T> strategy)
-        {
-            this.strategy = strategy;
-        }
-        
-        public IEnumerator<T> GetEnumerator()
-        {
-            return new Enumerator(this);
-        }
+        public InfinityList(IGenerationStrategy<T> strategy) => this.strategy = strategy;
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
-        public void Add(T item)
-        {
-            throw new InfinityListReadOnlyException();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public void Clear()
-        {
-            throw new InfinityListReadOnlyException();
-        }
+        public void Add(T item) => throw new InfinityListReadOnlyException();
 
-        public bool Contains(T item)
-        {
-            return true;
-        }
+        public void Clear() => throw new InfinityListReadOnlyException();
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            throw new TooLargeToCopyException();
-        }
+        public bool Contains(T item) => true;
 
-        public bool Remove(T item)
-        {
-            throw new InfinityListReadOnlyException();
-        }
+        public void CopyTo(T[] array, int arrayIndex) => throw new TooLargeToCopyException();
+
+        public bool Remove(T item) => throw new InfinityListReadOnlyException();
 
         /// <summary>
         /// Total items on this list

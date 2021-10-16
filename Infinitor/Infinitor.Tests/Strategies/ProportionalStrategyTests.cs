@@ -6,10 +6,7 @@ namespace Infinitor.Strategies
     {
         private ProportionalStrategy<int> strategy = null!;
 
-        private void CreateProportionalStrategy(
-            List<ProportionalItem<int>>? proportionalList = null)
-        {
+        private void CreateProportionalStrategy(List<ProportionalItem<int>>? proportionalList = null) =>
             strategy = new ProportionalStrategy<int>(proportionalList!);
-        }
     }
 }

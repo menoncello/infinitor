@@ -9,10 +9,8 @@ namespace Infinitor.Strategies
     {
         private UnlimitedStrategy<int> strategy = null!;
 
-        private void CreateStrategy(IRandomFactory<int>? factory = null)
-        {
+        private void CreateStrategy(IRandomFactory<int>? factory = null) =>
             strategy = new UnlimitedStrategy<int>(factory ?? new DummyFactory());
-        }
 
         [Test]
         public void UnlimitedStrategyMustInheritsFromGenerationStrategy()

@@ -20,10 +20,7 @@ namespace Infinitor
             }
 
             [Test]
-            public void DisposedMustReturnFalse()
-            {
-                enumerator.Disposed.Should().BeFalse();
-            }
+            public void DisposedMustReturnFalse() => enumerator.Disposed.Should().BeFalse();
 
             [Test]
             public void AfterBeDisposedTheDisposedMustReturnTrue()
@@ -40,16 +37,12 @@ namespace Infinitor
             }
 
             [Test]
-            public void IfIsNotInTheLastItemMoveNextMustReturnTrue()
-            {
+            public void IfIsNotInTheLastItemMoveNextMustReturnTrue() =>
                 enumerator.MoveNext().Should().BeTrue();
-            }
 
             [Test]
-            public void Enumerable_Current_MustBeZero()
-            {
+            public void Enumerable_Current_MustBeZero() =>
                 enumerable.GetEnumerator().Current.Should().Be(0);
-            }
 
             [Test]
             public void AfterDisposeEnumeratorValueMustBeReset()

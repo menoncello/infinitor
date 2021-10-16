@@ -10,10 +10,7 @@ namespace Infinitor.Factories
         [TestCase(5)]
         [TestCase(500)]
         [TestCase(1000)]
-        public void Generate_ResultMustBeTheSameTheNumber(int randomValue)
-        {
-            var factory = new IntegerFactory();
-            factory.Generate(randomValue).Should().Be(randomValue);
-        }
+        public void Generate_ResultMustBeTheSameTheNumber(int randomValue) =>
+            new IntegerFactory().Generate(randomValue).Should().Be(randomValue);
     }
 }

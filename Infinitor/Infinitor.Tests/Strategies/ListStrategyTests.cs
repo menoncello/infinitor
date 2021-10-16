@@ -6,9 +6,6 @@ namespace Infinitor.Strategies
     {
         private ListStrategy<int> strategy = null!;
 
-        private void CreateStrategy(IEnumerable<int> list)
-        {
-            strategy = new ListStrategy<int>(list);
-        }
+        private void CreateStrategy(IEnumerable<int> list) => strategy = new ListStrategy<int>(list);
     }
 }

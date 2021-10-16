@@ -4,9 +4,6 @@ namespace Infinitor
 {
     public class DummyStrategy : IGenerationStrategy<int>
     {
-        public int Generate(int randomNumber)
-        {
-            return 0;
-        }
+        public int Generate(int randomNumber) => 0;
     }
 }

@@ -9,10 +9,8 @@ namespace Infinitor.Strategies
         public class Default : ListStrategyTests
         {
             [Test]
-            public void Constructor_ListStrategyInheritsFromGenerationStrategy()
-            {
+            public void Constructor_ListStrategyInheritsFromGenerationStrategy() =>
                 new ListStrategy<int>(new[] {1}).Should().BeAssignableTo<IGenerationStrategy<int>>();
-            }
 
             [Test]
             public void Constructor_ThrowsExceptionWhenListIsNull()

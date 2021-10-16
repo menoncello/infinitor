@@ -16,10 +16,6 @@ namespace Infinitor.Strategies
                 : throw new ArgumentOutOfRangeException(nameof(capped));
         }
 
-        public T Generate(int randomNumber)
-        {
-            var modded = randomNumber % capped;
-            return factory.Generate(modded);
-        }
+        public T Generate(int randomNumber) => factory.Generate(randomNumber % capped);
     }
 }

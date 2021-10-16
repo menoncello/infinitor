@@ -16,10 +16,7 @@ namespace Infinitor.Strategies
             }
 
             [Test]
-            public void Generate_ReturnMustBeZero()
-            {
-                strategy.Generate(0).Should().Be(0);
-            }
+            public void Generate_ReturnMustBeZero() => strategy.Generate(0).Should().Be(0);
 
             [Test]
             [TestCase(-1)]

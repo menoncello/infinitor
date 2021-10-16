@@ -6,9 +6,7 @@ namespace Infinitor.Strategies
     {
         private CappedStrategy<int> strategy = null!;
 
-        private void CreateStrategy(IRandomFactory<int>? factory = null, int capped = 1)
-        {
+        private void CreateStrategy(IRandomFactory<int>? factory = null, int capped = 1) => 
             strategy = new CappedStrategy<int>(factory ?? new DummyFactory(), capped);
-        }
     }
 }

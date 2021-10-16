@@ -8,20 +8,14 @@ namespace Infinitor.Strategies
     {
         public class WithTwoItems : ProportionalStrategyTests
         {
-            private List<ProportionalItem<int>> proportionalList = null!;
-
             [SetUp]
-            public void SetUp()
-            {
-                proportionalList = new List<ProportionalItem<int>>
+            public void SetUp() =>
+                CreateProportionalStrategy(new List<ProportionalItem<int>>
                 {
                     new(2, 1),
                     new(1, 2)
-                };
+                });
 
-                CreateProportionalStrategy(proportionalList);
-            }
-            
             [Test]
             [TestCase(0, 1)]
             [TestCase(1999, 1)]
@@ -35,10 +29,8 @@ namespace Infinitor.Strategies
             }
 
             [Test]
-            public void Generate_ProportionalStrategyIsInheritedGenerationStrategy()
-            {
+            public void Generate_ProportionalStrategyIsInheritedGenerationStrategy() =>
                 strategy.Should().BeAssignableTo<IGenerationStrategy<int>>();
-            }
         }
     }
 }

@@ -14,9 +14,6 @@ namespace Infinitor.Strategies
             if (!list.Any()) throw new ArgumentOutOfRangeException(nameof(list));
         }
 
-        public T Generate(int randomNumber)
-        {
-            return list[randomNumber % list.Length];
-        }
+        public T Generate(int randomNumber) => list[randomNumber % list.Length];
     }
 }

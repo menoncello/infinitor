@@ -7,14 +7,9 @@ namespace Infinitor.Strategies
     {
         private readonly IRandomFactory<T> factory;
 
-        public UnlimitedStrategy(IRandomFactory<T> factory)
-        {
+        public UnlimitedStrategy(IRandomFactory<T> factory) =>
             this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
-        }
 
-        public T Generate(int randomNumber)
-        {
-            return factory.Generate(randomNumber);
-        }
+        public T Generate(int randomNumber) => factory.Generate(randomNumber);
     }
 }

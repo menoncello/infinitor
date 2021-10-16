@@ -6,9 +6,7 @@ namespace Infinitor
     {
         private InfinityList<int> list = null!;
 
-        private void CreateList(IGenerationStrategy<int>? strategy = null)
-        {
+        private void CreateList(IGenerationStrategy<int>? strategy = null) =>
             list = new InfinityList<int>(strategy ?? new DummyStrategy());
-        }
     }
 }
