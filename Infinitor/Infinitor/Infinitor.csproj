@@ -12,4 +12,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Strategies\RangeStrategy.cs" />
+    </ItemGroup>
+
 </Project>

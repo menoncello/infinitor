@@ -13,14 +13,14 @@ namespace Infinitor
             item = new ProportionalItem<int>(3m, 5);
 
         [Test]
-        public void ValuesMustBeEqualsToTheConstructor()
+        public void Constructor_ValuesMustBeEquals()
         {
             item.Chance.Should().Be(3m);
             item.Value.Should().Be(5);
         }
 
         [Test]
-        public void FullIntChanceMustBeEqualTo5000() =>
+        public void FullIntChance_MustBeEqualTo5000() =>
             item.FullIntChance.Should().Be(3000);
     }
 }

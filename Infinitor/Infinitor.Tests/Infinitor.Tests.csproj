@@ -28,4 +28,8 @@
       <Folder Include="Doubles" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Strategies\RangeStrategyTests.cs" />
+    </ItemGroup>
+
 </Project>

@@ -46,7 +46,13 @@ namespace Infinitor
                 Disposed = true;
             }
             
-            public void Dispose() => Dispose(true);
+            public void Dispose()
+            {
+                Dispose(true);
+                // This will break the stryker.net mutator
+                // but it is necessary and hard to test
+                GC.SuppressFinalize(this);
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{999E4805-B076-4327-98B0-B5720A9D7DD5}"
 	ProjectSection(SolutionItems) = preProject
 		.config\dotnet-tools.json = .config\dotnet-tools.json
+		stryker-config.json = stryker-config.json
 	EndProjectSection
 EndProject
 Global

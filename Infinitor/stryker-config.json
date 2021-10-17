@@ -1,0 +1,15 @@
+{
+  "stryker-config": {
+    "SuppressFinalize": "Complete",
+    "reporters": [
+      "progress",
+      "html"
+    ],
+    "ignore-methods": [
+      "*Log*",
+      "ToString",
+      "*HashCode*",
+      "*Dispose*"
+    ]
+  }
+}
