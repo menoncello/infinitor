@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{999E48
 	ProjectSection(SolutionItems) = preProject
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		stryker-config.json = stryker-config.json
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global

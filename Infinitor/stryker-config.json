@@ -9,7 +9,7 @@
       "*Log*",
       "ToString",
       "*HashCode*",
-      "*Dispose*"
+      "Dispose"
     ]
   }
 }
